@@ -22,6 +22,8 @@ export const env = {
   REDIS_HOST: optional('REDIS_HOST', '127.0.0.1'),
   REDIS_PORT: parseInt(optional('REDIS_PORT', '6379'), 10),
   REDIS_CONNECT_TIMEOUT_MS: parseInt(optional('REDIS_CONNECT_TIMEOUT_MS', '3000'), 10),
+  REDIS_USERNAME: optional('REDIS_USERNAME', ''),
+  REDIS_PASSWORD: optional('REDIS_PASSWORD', ''),
 
   RATE_LIMIT_WINDOW_MS: parseInt(required('RATE_LIMIT_WINDOW_MS'), 10),
   RATE_LIMIT_MAX_PUBLIC: parseInt(required('RATE_LIMIT_MAX_PUBLIC'), 10),

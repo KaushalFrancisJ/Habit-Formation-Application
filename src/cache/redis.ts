@@ -11,6 +11,8 @@ export const connectRedis = (): Promise<void> =>
       connectTimeout: env.REDIS_CONNECT_TIMEOUT_MS,
       maxRetriesPerRequest: 0,
       lazyConnect: true,
+      ...(env.REDIS_USERNAME && { username: env.REDIS_USERNAME }),
+      ...(env.REDIS_PASSWORD && { password: env.REDIS_PASSWORD }),
     });
 
     const timeout = setTimeout(() => {
