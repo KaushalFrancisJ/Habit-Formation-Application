@@ -8,5 +8,8 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:3000',
     },
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'unsafe-none',
+    },
   },
 })

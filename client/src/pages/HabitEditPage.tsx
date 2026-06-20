@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getHabit, updateHabit } from '../api/habits.ts';
 import type { HabitWithStats } from '../types/index.ts';
 import { HabitForm } from '../components/HabitForm.tsx';
+import type { HabitFormInitial } from '../components/HabitForm.tsx';
 import { Spinner } from '../components/Spinner.tsx';
 import { ErrorMessage } from '../components/ErrorMessage.tsx';
 
@@ -21,7 +22,7 @@ export const HabitEditPage = () => {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const handleSubmit = async (input: Parameters<typeof updateHabit>[1]) => {
+  const handleSubmit = async (input: HabitFormInitial) => {
     await updateHabit(Number(id), input);
     navigate(`/habits/${id}`);
   };

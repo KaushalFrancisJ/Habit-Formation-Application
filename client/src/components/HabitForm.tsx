@@ -1,15 +1,25 @@
 import { useState } from 'react';
-import type { Habit } from '../types/index.ts';
+import type { DifficultyLevel, FrequencyType } from '../types/index.ts';
 import { ErrorMessage } from './ErrorMessage.tsx';
 
+export interface HabitFormInitial {
+  title?: string;
+  description?: string;
+  estimated_duration_minutes?: number;
+  difficulty_level?: DifficultyLevel;
+  frequency_type?: FrequencyType;
+  target_frequency?: number;
+  grace_period_hours?: number;
+}
+
 interface HabitFormProps {
-  initial?: Partial<Habit>;
+  initial?: HabitFormInitial;
   onSubmit: (data: {
     title: string;
     description?: string;
     estimated_duration_minutes?: number;
-    difficulty_level: string;
-    frequency_type: string;
+    difficulty_level: DifficultyLevel;
+    frequency_type: FrequencyType;
     target_frequency: number;
     grace_period_hours?: number;
   }) => Promise<void>;
@@ -19,8 +29,8 @@ interface HabitFormProps {
 export const HabitForm = ({ initial, onSubmit, onCancel }: HabitFormProps) => {
   const [title, setTitle] = useState(initial?.title ?? '');
   const [description, setDescription] = useState(initial?.description ?? '');
-  const [difficulty, setDifficulty] = useState(initial?.difficulty_level ?? 'EASY');
-  const [frequencyType, setFrequencyType] = useState(initial?.frequency_type ?? 'DAILY');
+  const [difficulty, setDifficulty] = useState<DifficultyLevel>(initial?.difficulty_level ?? 'EASY');
+  const [frequencyType, setFrequencyType] = useState<FrequencyType>(initial?.frequency_type ?? 'DAILY');
   const [targetFrequency, setTargetFrequency] = useState(initial?.target_frequency ?? 1);
   const [duration, setDuration] = useState(initial?.estimated_duration_minutes ?? '');
   const [gracePeriod, setGracePeriod] = useState(initial?.grace_period_hours ?? '');
@@ -66,7 +76,7 @@ export const HabitForm = ({ initial, onSubmit, onCancel }: HabitFormProps) => {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className={labelCls}>Difficulty</label>
-          <select className={inputCls} value={difficulty} onChange={e => setDifficulty(e.target.value)}>
+          <select className={inputCls} value={difficulty} onChange={e => setDifficulty(e.target.value as DifficultyLevel)}>
             <option value="EASY">Easy</option>
             <option value="MEDIUM">Medium</option>
             <option value="HARD">Hard</option>
@@ -74,7 +84,7 @@ export const HabitForm = ({ initial, onSubmit, onCancel }: HabitFormProps) => {
         </div>
         <div>
           <label className={labelCls}>Frequency</label>
-          <select className={inputCls} value={frequencyType} onChange={e => { setFrequencyType(e.target.value); setTargetFrequency(1); }}>
+          <select className={inputCls} value={frequencyType} onChange={e => { setFrequencyType(e.target.value as FrequencyType); setTargetFrequency(1); }}>
             <option value="DAILY">Daily</option>
             <option value="WEEKLY">Weekly</option>
           </select>
