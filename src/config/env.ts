@@ -29,4 +29,6 @@ export const env = {
 
   JWT_SECRET: required('JWT_SECRET'),
   JWT_EXPIRES_IN: optional('JWT_EXPIRES_IN', '7d'),
+
+  CORS_ORIGIN: optional('CORS_ORIGIN', 'http://localhost:5173'),
 };
