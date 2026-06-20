@@ -10,6 +10,8 @@ client/dist/
 .env
 .env.local
 .env.*.local
+client/.env
+client/.env.local
 
 # Logs
 *.log
